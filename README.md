@@ -187,4 +187,4 @@ In root of navbar run:
         
 ```npm start```
 
-Navigite the shell app url, you should see the navbar.
+Navigate the shell app url, you should see the navbar.
