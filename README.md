@@ -7,7 +7,7 @@ This assumes you have the the shell app as in the repo, which acts like a gatewa
  
 The following knowledge is a prerequisite, I struggled setting Single-spa, then realised that I was missing this foundational knowledge.
 
-Webpack, this article may be a good read, [weebpack](https://developer.okta.com/blog/2019/12/09/angular-webpack).
+[Webpack](https://developer.okta.com/blog/2019/12/09/angular-webpack).
 
 [Angular cli build api](https://blog.nrwl.io/angular-cli-demystifying-the-workspace-7f59ffaab4cb).
 
