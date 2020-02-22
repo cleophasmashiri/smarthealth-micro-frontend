@@ -116,18 +116,15 @@ src/index.html as:
 
 ## Step 3: Install and Configure custom-webpack.
 
+Install @angular-builders/custom-webpack.
+
 ```
 npm install @angular-builders/custom-webpack --save-dev
 ```
 
-d. Configure single-spa.
-Install @angular-builders/custom-webpack.
-
-```npm install -save-dev @angular-builders/custom-webpack```
-
 Add the following file to the root folder
 
-```extra-webpack.config.js```
+```touch extra-webpack.config.js```
 
 With the following:
     
@@ -142,7 +139,7 @@ const singleSpaAngularWebpack = require('single-spa-angular/lib/webpack').defaul
 }
 ```
 
-In angular.json replace the following:
+### In angular.json replace the following:
 
 ```
 "builder": "@angular-devkit/build-angular:browser",
@@ -169,7 +166,20 @@ Replace
 With
 ``` "builder": "@angular-builders/custom-webpack:dev-server",```
 
-In package.json scripts section replace:
+Replace 
+
+```
+"main": "src/main.ts",
+```
+
+With
+
+```
+"main": "src/main.single-spa.ts",
+```
+
+
+### In package.json scripts section replace:
 
 ```
 "start": "ng serve",
@@ -182,7 +192,7 @@ With
 "build": "npm run build:single-spa",
 ```
 
-And add the following 
+And add the following, change port 4301 to something that makes sense to you.
       
 ```
 "build:single-spa": "ng build --prod --deploy-url /dist/navbar --output-hashing none",
@@ -190,7 +200,7 @@ And add the following
 ```
 
 
-e. Add and Test in Shell.
+Add and Test in Shell.
 
 Register navbar in the shell project index.html
 
@@ -218,6 +228,61 @@ In root of navbar run:
 
 Navigate the shell app url, you should see the navbar.
 
+## Step 4: Handling routing apps.
+For apps other than the navbar with routing you need to do the following
+
+Generate component src/app/empty-route/empty-route-component
+
+```
+
+ng generate component empty-route
+
+```
+Update empty-route-component to, delete empty-route-component.html and empty-route-component.css:
+
+```
+@Component({
+  selector: 'app-empty-route',
+  template: ''
+})
+export class EmptyRouteComponent implements OnInit {
+  constructor() { }
+  ngOnInit() {
+  }
+}
+
+```
+
+
+Update bookings/src/app/app-routing.module.ts
+
+From
+```
+const routes: Routes = [];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+```
+
+To
+
+```
+const routes: Routes = [
+  { path: '**', component: EmptyRouteComponent },
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
+  providers: [
+    { provide: APP_BASE_HREF, useValue: '/' },
+  ],
+})
+export class AppRoutingModule { }
+```
 
 ___
 
