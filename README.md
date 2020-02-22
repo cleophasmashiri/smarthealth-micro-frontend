@@ -23,36 +23,13 @@ Create navbar.
 
 ```npm install single-spa-angular --save```
 
-Add
-
-```navbar/src/main.single-spa.ts```
-        
-With the following content
-        e
-```
-const lifecycles = singleSpaAngular({
-bootstrapFunction: singleSpaProps => {
-singleSpaPropsSubject.next(singleSpaProps);
-return platformBrowserDynamic().bootstrapModule(AppModule);
-},
-template: '<navbar-root />',
-Router,
-NgZone: NgZone,
-});
-
-export const bootstrap = lifecycles.bootstrap;
-export const mount = lifecycles.mount;
-
-export const unmount = lifecycles.unmount;
-```
-
 Add folder
 
-  ```src/single-spa```
+  ``` mkdir src/single-spa```
          
 Add file
 
-```src/single-spa/asset-url.ts```
+```touch src/single-spa/asset-url.ts```
          
 
 With the following
@@ -71,17 +48,56 @@ return `${publicPath}${publicPathSuffix}assets${urlPrefix}${url}`;
 Add file 
         
 ```
-src/single-spa/single-spa-props.ts
+touch src/single-spa/single-spa-props.ts
 ```
 
-With the following
+Add the following code
 ```        
+import { ReplaySubject } from 'rxjs';
+import { AppProps } from 'single-spa';
+
 export const singleSpaPropsSubject = new ReplaySubject<SingleSpaProps>(1)
 
 // Add any custom single-spa props you have to this type def
 // https://single-spa.js.org/docs/building-applications.html#custom-props
 export type SingleSpaProps = AppProps & {
 }
+
+```
+
+
+Add file.
+
+```touch src/main.single-spa.ts```
+        
+With the following content
+  
+```
+import { enableProdMode, NgZone } from '@angular/core';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { Router } from '@angular/router';
+import { AppModule } from './app/app.module';
+import { environment } from './environments/environment';
+import singleSpaAngular from 'single-spa-angular';
+import { singleSpaPropsSubject } from './single-spa/single-spa-props';
+
+if (environment.production) {
+    enableProdMode();
+}
+
+const lifecycles = singleSpaAngular({
+    bootstrapFunction: singleSpaProps => {
+        singleSpaPropsSubject.next(singleSpaProps);
+        return platformBrowserDynamic().bootstrapModule(AppModule);
+    },
+    template: '<navbar-root />',
+    Router,
+    NgZone: NgZone,
+});
+
+export const bootstrap = lifecycles.bootstrap;
+export const mount = lifecycles.mount;
+export const unmount = lifecycles.unmount;
 ```
 
 Update 
