@@ -4,6 +4,10 @@ Smarthealth is fictitious online health platform at scale.
 
 I am going to show how to implement frontend at scale using Single-spa framework to create microfrontends with separate projects using different single page frameworks (Angular 8, Angularjs, Reactjs) in three easy steps.
 This assumes you have the the shell app as in the repo, which acts like a gateway for other apps.
+ 
+The following knowledge is a prerequisite, I struggled setting Single-spa, then realised that I was missing this foundational knowledge.
+... Webpack, this article may be a good read, [weebpack](https://developer.okta.com/blog/2019/12/09/angular-webpack).
+... [Angular cli build api](https://blog.nrwl.io/angular-cli-demystifying-the-workspace-7f59ffaab4cb).
 
 ## Step 1: Create the application.
 
