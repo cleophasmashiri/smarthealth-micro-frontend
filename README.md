@@ -1,6 +1,7 @@
 # Microfrontend for Smarthealth
 
 I am going to show you how to use Single-spa framework to create microfrontends with separate projects using different single page frameworks (Angular 8, Angularjs, Reactjs) in three easy steps.
+This assumes you have the the shell app as in the repo, which acts like a gateway for other apps.
 
 ## Step 1: Create the application.
 
@@ -192,3 +193,8 @@ In root of navbar run:
 ```npm start```
 
 Navigate the shell app url, you should see the navbar.
+
+
+___
+
+You can repeat steps 1,2 3 for each app.
