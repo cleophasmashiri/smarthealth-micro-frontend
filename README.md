@@ -1,7 +1,5 @@
 # Microfrontends
-
-1. Create shell.
-2. Create tenant. 
+Create navbar. 
 
 ... Create new application.
 
