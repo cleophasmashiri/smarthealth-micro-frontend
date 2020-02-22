@@ -228,7 +228,7 @@ In root of navbar run:
 
 Navigate the shell app url, you should see the navbar.
 
-## Step 4: Handling routing apps.
+## Step 4: Handling routing apps (Apply this step on to apps but not navbar).
 For apps other than the navbar with routing you need to do the following
 
 Generate component src/app/empty-route/empty-route-component
@@ -282,6 +282,24 @@ const routes: Routes = [
   ],
 })
 export class AppRoutingModule { }
+```
+
+Update src/app/app.module.ts to this
+
+```
+@NgModule({
+  declarations: [
+    AppComponent,
+    EmptyRouteComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
 ```
 
 ___
