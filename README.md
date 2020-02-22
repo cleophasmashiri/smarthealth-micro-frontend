@@ -198,3 +198,4 @@ Navigate the shell app url, you should see the navbar.
 ___
 
 You can repeat steps 1,2 3 for each app.
+Please let me know if you find this useful on [@CleophasMashiri](https://twitter.com/CleophasMashiri) 
