@@ -1,4 +1,4 @@
-# Microfrontend for Smarthealth
+# Microfrontends for Smarthealth
 
 Smarthealth is fictitious online health platform at scale.
 
