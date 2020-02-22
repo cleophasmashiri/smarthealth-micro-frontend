@@ -1,0 +1,152 @@
+# Microfrontends
+
+1. Create shell.
+2. Create tenant. 
+
+... Create new application.
+
+`ng new navbar`
+
+... Install and Configure single-spa-angular.
+
+`npm install single-spa-angular --save`
+
+Add
+
+`navbar/src/main.single-spa.ts`
+        
+With the following content
+        
+`const lifecycles = singleSpaAngular({
+bootstrapFunction: singleSpaProps => {
+singleSpaPropsSubject.next(singleSpaProps);
+return platformBrowserDynamic().bootstrapModule(AppModule);
+},
+template: '<navbar-root />',
+Router,
+NgZone: NgZone,
+});
+
+export const bootstrap = lifecycles.bootstrap;
+export const mount = lifecycles.mount;
+
+export const unmount = lifecycles.unmount;`
+
+    Add folder
+  `src/single-spa`
+         
+Add file
+`src/single-spa/asset-url.ts`
+         
+With the following
+        
+`
+export function assetUrl(url: string): string {
+// @ts-ignore
+const publicPath = __webpack_public_path__;
+const publicPathSuffix = publicPath.endsWith('/') ? '' : '/';
+const urlPrefix = url.startsWith('/') ? '' : '/'
+
+return `${publicPath}${publicPathSuffix}assets${urlPrefix}${url}`;
+}
+`
+
+        Add file 
+        `src/single-spa/single-spa-props.ts`
+
+        With the following
+        
+      `export const singleSpaPropsSubject = new ReplaySubject<SingleSpaProps>(1)
+
+      // Add any custom single-spa props you have to this type def
+      // https://single-spa.js.org/docs/building-applications.html#custom-props
+      export type SingleSpaProps = AppProps & {
+      }`
+
+        Update 
+        `/src/app/app.component.ts selector as below`
+        `selector: 'navbar-root'`
+
+        Update 
+        `src/index.html as `
+        `<navbar-root></navbar-root>`
+
+
+    c. Install and Configure custom-webpack.
+        `
+        npm install @angular-builders/custom-webpack --save-dev
+        `
+
+    d. Configure single-spa.
+    Install @angular-builders/custom-webpack.
+
+    `npm install -save @angular-builders/custom-webpack`
+
+    Add the following to the root folder
+    `extra-webpack.config.js`
+
+    With the following:
+    `const singleSpaAngularWebpack = require('single-spa-angular/lib/webpack').default
+
+        module.exports = (angularWebpackConfig, options) => {
+        const singleSpaWebpackConfig = singleSpaAngularWebpack(angularWebpackConfig, options)
+
+        // Feel free to modify this webpack config however you'd like to
+        return singleSpaWebpackConfig
+    }`
+
+    In `angular.json` 
+
+    Replace the following:
+
+    `"builder": "@angular-devkit/build-angular:browser",`
+    With
+    `"builder": "@angular-builders/custom-webpack:browser",
+    `
+
+    Replace `"scripts": []`
+    With the following
+    `"scripts": [],
+    "customWebpackConfig": {
+        "path": "./extra-webpack.config.js"
+    }`
+
+    Replace 
+    ` "builder": "@angular-devkit/build-angular:dev-server",`
+    With
+    ` "builder": "@angular-builders/custom-webpack:dev-server",`
+
+    In package.json scripts section
+     Replace
+     `"start": "ng serve",
+      "build": "ng build",
+     `
+
+     With
+     `"start": "npm run serve:single-spa",
+      "build": "npm run build:single-spa",`
+
+    And add the following 
+      ` "build:single-spa": "ng build --prod --deploy-url /dist/navbar --output-hashing none",
+    "serve:single-spa": "ng serve --disable-host-check --port 4301 --deploy-url http://localhost:4301/ --live-reload false",`
+
+
+    e. Add and Test in Shell.
+
+    Register navbar in the shell project index.html
+    `singleSpa.registerApplication(
+          'navbar',
+          function () {
+            return System.import('navbar');
+          },
+          function (location) {
+            return true;
+          }
+        )`
+
+        Add app in systemjs section.
+        `navbar": "http://localhost:4301/main.js",`
+
+        In root of navbar run:
+        `npm start`
+        Navigite the shell app url, you should see the navbar.

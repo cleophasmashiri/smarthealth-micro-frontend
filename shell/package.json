@@ -1,0 +1,22 @@
+{
+  "name": "shell",
+  "version": "1.0.0",
+  "description": "Shell Application for bootstraping microfrontend applications",
+  "main": "index.js",
+  "scripts": {
+    "start": "serve -s -l 4200"
+  },
+  "keywords": [
+    "Shell",
+    "Microfrontends",
+    "Javascript",
+    "Single-Spa",
+    "Systemjs"
+  ],
+  "author": "Cleophas Mashiri",
+  "license": "ISC",
+  "devDependencies": {
+    "serve": "^11.1.0"
+  },
+  "dependencies": {}
+}
