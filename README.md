@@ -1,6 +1,6 @@
 # Microfrontends for Smarthealth
 
-Smarthealth is fictitious online health platform at scale.
+Smarthealth is an online health platform at your finger tips at scale.
 
 I am going to show how to implement frontend at scale using Single-spa framework to create microfrontends with separate projects using different single page frameworks (Angular 8, Angularjs, Reactjs) in three easy steps.
 This assumes you have the the shell app as in the repo, which acts like a gateway for other apps.
