@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta http-equiv="Content-Security-Policy" content="default-src *  data: blob: 'unsafe-inline' 'unsafe-eval'; script-src * 'unsafe-inline' 'unsafe-eval'; connect-src * 'unsafe-inline'; img-src * data: blob: 'unsafe-inline'; frame-src *; style-src * data: blob: 'unsafe-inline'; font-src * data: blob: 'unsafe-inline';">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Your application</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="importmap-type" content="systemjs-importmap">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
-    <script type="systemjs-importmap">
+
+<head>
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src *  data: blob: 'unsafe-inline' 'unsafe-eval'; script-src * 'unsafe-inline' 'unsafe-eval'; connect-src * 'unsafe-inline'; img-src * data: blob: 'unsafe-inline'; frame-src *; style-src * data: blob: 'unsafe-inline'; font-src * data: blob: 'unsafe-inline';">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Your application</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="importmap-type" content="systemjs-importmap">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+  <script type="systemjs-importmap">
       {
         "imports": {
           "navbar": "http://localhost:4301/main.js",
@@ -17,108 +19,122 @@
         }
       }
     </script>
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/single-spa/4.3.5/system/single-spa.min.js" as="script" crossorigin="anonymous" />
-    <script src='https://unpkg.com/core-js-bundle@3.1.4/minified.js'></script>
-    <script src="https://unpkg.com/zone.js"></script>
-    <script src="https://unpkg.com/import-map-overrides@1.6.0/dist/import-map-overrides.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/4.0.0/system.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/4.0.0/extras/amd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/4.0.0/extras/named-exports.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/4.0.0/extras/named-register.min.js"></script>
-  </head>
-  <body>
-    <script>
-      System.import('single-spa').then(function (singleSpa) {
-        singleSpa.registerApplication(
-          'navbar',
-          function () {
-            return System.import('navbar');
-          },
-          function (location) {
-            return true;
-          }
-        )
-        // singleSpa.registerApplication(
-        //   'bookings',
-        //   function () {
-        //     return System.import('bookings');
-        //   },
-        //   function (location) {
-        //     return true;
-        //   }
-        // )
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/single-spa/4.3.5/system/single-spa.min.js"
+    as="script" crossorigin="anonymous" />
+  <script src='https://unpkg.com/core-js-bundle@3.1.4/minified.js'></script>
+  <script src="https://unpkg.com/zone.js"></script>
+  <script src="https://unpkg.com/import-map-overrides@1.6.0/dist/import-map-overrides.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/4.0.0/system.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/4.0.0/extras/amd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/4.0.0/extras/named-exports.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/4.0.0/extras/named-register.min.js"></script>
+</head>
 
-        singleSpa.registerApplication(
-          'bookings',
-          function () {
-            return System.import('bookings');
-          },
-          function (location) {
-            return location.pathname.startsWith('/bookings');
-          }
-        );
-
-        // singleSpa.registerApplication(
-        //   'app2',
-        //   function () {
-        //     return System.import('app2');
-        //   },
-        //   function (location) {
-        //     return location.pathname.startsWith('/app2');
-        //   }
-        // )
-
-        singleSpa.start();
-      })
-    </script>
-    <style>
-      .active {
-        color: #fff !important;
-        background-color: #007bff;
-        border-color: #007bff;
-      }
-    
-      .small,
-      small {
-        font-size: 57%;
-        font-weight: 400;
-      }
-    
-      html {
-        font-size: 14px;
-      }
-    
-      @media (min-width: 768px) {
-        html {
-          font-size: 16px;
+<body>
+  <script>
+    System.import('single-spa').then(function (singleSpa) {
+      singleSpa.registerApplication(
+        'navbar',
+        function () {
+          return System.import('navbar');
+        },
+        function (location) {
+          return true;
         }
-      }
-    
-      .container {
-        max-width: 960px;
-      }
-    
-      .pricing-header {
-        max-width: 700px;
-      }
-    
-      .card-deck .card {
-        min-width: 220px;
-      }
-    
-      .border-top {
-        border-top: 1px solid #e5e5e5;
-      }
-    
-      .border-bottom {
-        border-bottom: 1px solid #e5e5e5;
-      }
-    
-      .box-shadow {
-        box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-      }
-    </style>
-    <import-map-overrides-full></import-map-overrides-full>
-  </body>
-</html>
+      )
+      // singleSpa.registerApplication(
+      //   'bookings',
+      //   function () {
+      //     return System.import('bookings');
+      //   },
+      //   function (location) {
+      //     return true;
+      //   }
+      // )
 
+      singleSpa.registerApplication(
+        'bookings',
+        function () {
+          return System.import('bookings');
+        },
+        function (location) {
+          return location.pathname.startsWith('/bookings');
+        }
+      );
+
+      // singleSpa.registerApplication(
+      //   'app2',
+      //   function () {
+      //     return System.import('app2');
+      //   },
+      //   function (location) {
+      //     return location.pathname.startsWith('/app2');
+      //   }
+      // )
+
+      singleSpa.start();
+    })
+  </script>
+  <style>
+    .active {
+      color: #fff !important;
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+
+    .small,
+    small {
+      font-size: 57%;
+      font-weight: 400;
+    }
+
+    html {
+      font-size: 14px;
+    }
+
+    @media (min-width: 768px) {
+      html {
+        font-size: 16px;
+      }
+    }
+
+    .container {
+      max-width: 960px;
+    }
+
+    .pricing-header {
+      max-width: 700px;
+    }
+
+    .card-deck .card {
+      min-width: 220px;
+    }
+
+    .border-top {
+      border-top: 1px solid #e5e5e5;
+    }
+
+    .border-bottom {
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    .box-shadow {
+      box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    }
+
+    .form-control-borderless {
+      border: none;
+    }
+
+    .form-control-borderless:hover,
+    .form-control-borderless:active,
+    .form-control-borderless:focus {
+      border: none;
+      outline: none;
+      box-shadow: none;
+    }
+  </style>
+  <import-map-overrides-full></import-map-overrides-full>
+</body>
+
+</html>

@@ -231,57 +231,34 @@ Navigate the shell app url, you should see the navbar.
 ## Step 4: Handling routing apps (Apply this step on to apps but not navbar).
 For apps other than the navbar with routing you need to do the following
 
-Generate component src/app/empty-route/empty-route-component
+Generate components bookings, new-booking, patients 
 
-```
-
-ng generate component empty-route
-
-```
-Update empty-route-component to, delete empty-route-component.html and empty-route-component.css:
-
-```
-@Component({
-  selector: 'app-empty-route',
-  template: ''
-})
-export class EmptyRouteComponent implements OnInit {
-  constructor() { }
-  ngOnInit() {
-  }
-}
-
-```
 
 
 Update bookings/src/app/app-routing.module.ts
-
-From
-```
-const routes: Routes = [];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }
-```
 
 To
 
 ```
 const routes: Routes = [
-  { path: '**', component: EmptyRouteComponent },
+  {path: 'searchbookings', component: BookingsComponent},
+  {path: 'newbooking', component: NewBookingComponent},
+  {path: 'patients', component: PatientsComponent},
+  { path: '',
+    redirectTo: 'searchbookings',
+    pathMatch: 'full'
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {})],
   exports: [RouterModule],
   providers: [
-    { provide: APP_BASE_HREF, useValue: '/' },
+    { provide: APP_BASE_HREF, useValue: '/bookings/' },
   ],
 })
 export class AppRoutingModule { }
+
 ```
 
 Update src/app/app.module.ts to this
@@ -290,7 +267,9 @@ Update src/app/app.module.ts to this
 @NgModule({
   declarations: [
     AppComponent,
-    EmptyRouteComponent
+    BookingsComponent,
+    NewBookingComponent,
+    PatientsComponent
   ],
   imports: [
     BrowserModule,
