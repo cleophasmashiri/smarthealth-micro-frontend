@@ -1,11 +1,16 @@
-# Microfrontends
+# Microfrontend for Smarthealth
+
+I am going to show you how to use Single-spa framework to create microfrontends with separate projects using different single page frameworks (Angular 8, Angularjs, Reactjs) in three easy steps.
+
+## Step 1: Create the application.
+
 Create navbar. 
 
 ... Create new application.
 
 ```ng new navbar```
 
-... Install and Configure single-spa-angular.
+## Step 2: Install and Configure single-spa-angular.
 
 ```npm install single-spa-angular --save```
 
@@ -14,7 +19,7 @@ Add
 ```navbar/src/main.single-spa.ts```
         
 With the following content
-        
+        e
 ```
 const lifecycles = singleSpaAngular({
 bootstrapFunction: singleSpaProps => {
@@ -84,7 +89,8 @@ src/index.html as:
 ```<navbar-root></navbar-root>```
 
 
-c. Install and Configure custom-webpack.
+## Step 3: Install and Configure custom-webpack.
+
 ```
 npm install @angular-builders/custom-webpack --save-dev
 ```
